@@ -1,0 +1,13 @@
+node_modules/
+*/node_modules/
+
+# Ignore environment variables (SECRETS)
+.env
+*/.env
+
+# Ignore build outputs
+dist/
+build/
+
+# Ignore system files
+.DS_Store
