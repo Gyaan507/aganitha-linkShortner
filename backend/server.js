@@ -1,4 +1,4 @@
-// server.js
+
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
@@ -28,6 +28,20 @@ app.get('/', (req, res) => {
 });
 
 // Server Listener
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+if (require.main === module) {
+    app.listen(PORT, () => {
+      console.log(`Backend running on port ${PORT}`);
+    });
+}
+
+
+
+
+
+if (require.main === module) {
+    app.listen(PORT, () => {
+      console.log(`Backend running on port ${PORT}`);
+    });
+}
+
+module.exports = app;
