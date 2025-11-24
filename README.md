@@ -1,28 +1,57 @@
-TinyLink - Full Stack URL ShortenerTinyLink is a modern, full-stack URL shortening application designed to mimic the core functionality and aesthetic of platforms like Bitly. It allows users to shorten long URLs, generate QR codes, and track click analytics in real-time.🚀 FeaturesURL Shortening: Convert long URLs into short, manageable links.Custom Short Codes: Users can define their own custom aliases (e.g., /google12).QR Code Generation: Instantly generate downloadable QR codes for any URL.Real-time Analytics: Track total clicks and the "last clicked" timestamp for every link.Link Management: View a dashboard of all links with options to copy or delete them.High-Contrast UI: A professional, clean interface inspired by Bitly.Responsive Design: Fully functional on mobile and desktop devices.🛠️ Tech StackFrontend:React.js (Vite)React Router (SPA Routing)Plain CSS (Custom High-Contrast Theme)Backend:Node.js & Express.jsPostgreSQL (Neon Database)qrcode library for image generationDeployment:Vercel (Frontend & Backend via Serverless Functions)📂 Project StructureThis project is structured as a Monorepo:TinyLink/
-├── backend/                # Express Server & API Logic
-│   ├── config/             # Database connection
-│   ├── routes/             # API endpoints (links, redirect, qr)
-│   ├── utils/              # Helper functions
-│   └── server.js           # Entry point
-├── frontend/               # React Application
-│   ├── src/
-│   │   ├── App.jsx         # Main Dashboard & Router
-│   │   ├── StatsPage.jsx   # Analytics View
-│   │   └── apiService.js   # API Fetch Wrapper
-│   └── ...
-├── vercel.json             # Deployment configuration
-└── README.md
-⚙️ Installation & SetupPrerequisitesNode.js (v16 or higher)PostgreSQL Database (Local or Cloud like Neon/Supabase)1. Clone the Repositorygit clone [https://github.com/YOUR_USERNAME/tinylink-assignment.git](https://github.com/YOUR_USERNAME/tinylink-assignment.git)
-cd tinylink-assignment
-2. Backend SetupNavigate to the backend folder and install dependencies:cd backend
-npm install
-Environment Variables:Create a .env file in the backend/ directory:# Your PostgreSQL connection string
-DATABASE_URL=postgres://user:password@host:port/database
+# TinyLink - URL Shortener
 
-# Base URL for the application (Localhost for dev)
+TinyLink is a full-stack URL shortener application that allows users to shorten URLs, create custom aliases, generate QR codes, and view basic analytics.
+
+## Features
+- Shorten long URLs
+- Custom short codes
+- QR code generation (PNG)
+- Analytics: total clicks and last clicked time
+- Copy and delete link options
+- Responsive frontend UI
+- Backend built with Express.js
+- PostgreSQL database (Neon DB)
+
+## Tech Stack
+Frontend: React.js, Vite, CSS  
+Backend: Node.js, Express.js  
+Database: PostgreSQL  
+Utilities: qrcode, pg  
+Deployment: Vercel
+
+## Project Structure
+TinyLink/
+├── backend/
+│   ├── config/
+│   ├── routes/
+│   ├── utils/
+│   └── server.js
+├── frontend/
+│   ├── src/
+│   │   ├── App.jsx
+│   │   ├── StatsPage.jsx
+│   │   ├── apiService.js
+│   │   └── index.css
+│   └── vite.config.js
+└── vercel.json
+
+## Installation
+
+### Clone Repository
+git clone https://github.com/YOUR_USERNAME/tinylink-assignment.git  
+cd tinylink-assignment
+
+### Backend Setup
+cd backend  
+npm install
+
+Create a .env file:
+DATABASE_URL=postgres://user:password@host:port/database
 BASE_URL=http://localhost:5000
 PORT=5000
-Database Schema:Run the following SQL command in your database to create the required table:CREATE TABLE links (
+
+Create database table:
+CREATE TABLE links (
     id SERIAL PRIMARY KEY,
     short_code VARCHAR(8) UNIQUE NOT NULL CHECK (short_code ~ '^[A-Za-z0-9]{6,8}$'),
     target_url TEXT NOT NULL,
@@ -30,11 +59,35 @@ Database Schema:Run the following SQL command in your database to create the req
     last_clicked_at TIMESTAMP WITH TIME ZONE,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
 );
-3. Frontend SetupNavigate to the frontend folder and install dependencies:cd ../frontend
+
+### Frontend Setup
+cd ../frontend  
 npm install
-🏃‍♂️ Running LocallyYou need to run both the backend and frontend servers simultaneously.Terminal 1 (Backend):cd backend
-npm run dev
-# Server runs on http://localhost:5000
-Terminal 2 (Frontend):cd frontend
-npm run dev
-# UI runs on http://localhost:5173
+
+## Running Locally
+
+### Backend
+cd backend  
+npm run dev  
+# Runs on http://localhost:5000
+
+### Frontend
+cd frontend  
+npm run dev  
+# Runs on http://localhost:5173
+
+## API Endpoints
+GET /healthz  
+GET /api/links  
+POST /api/links  
+GET /api/links/:code  
+DELETE /api/links/:code  
+GET /api/qr?url=...  
+GET /:code  
+
+## Deployment (Vercel)
+1. Push repo to GitHub
+2. Import into Vercel
+3. Select Vite as framework
+4. Add DATABASE_URL environment variable
+5. Deploy
