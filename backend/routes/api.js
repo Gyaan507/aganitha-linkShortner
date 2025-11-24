@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../config/db'); 
-const QRCode = require('qrcode'); // Import the QR code library
+const QRCode = require('qrcode'); 
 const { generateRandomCode, isValidCustomCode, isValidUrl } = require('../utils/codeGenerator');
 
 // --- GET /api/links - List all links ---
@@ -114,8 +114,8 @@ router.get('/qr', async (req, res) => {
             width: 300,
             margin: 2,
             color: {
-                dark: '#1f2a41', // Dark blue modules
-                light: '#ffffff' // White background
+                dark: '#1f2a41', 
+                light: '#ffffff' 
             }
         });
         

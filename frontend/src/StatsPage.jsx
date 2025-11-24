@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { fetchLinks } from './apiService'; // Reuse fetchLinks (but we'll adjust below)
+import { fetchLinks } from './apiService'; 
 
-// Since apiService only has fetchLinks (all links), we need to add 
-// a specific fetch function for one link's stats. 
 
-// Note: To avoid modifying apiService.js again, we will define the 
-// specific fetch here, but in a real project, this function should be in apiService.js.
 const fetchLinkStats = async (code) => {
     const API_URL = `http://localhost:5000/api/links/${code}`;
     const response = await fetch(API_URL);
@@ -18,14 +14,12 @@ const fetchLinkStats = async (code) => {
     return data;
 };
 
-// Helper to format date
 const formatDate = (dateString) => {
     if (!dateString) return 'Never';
     return new Date(dateString).toLocaleString();
 };
 
 function StatsPage() {
-    // Get the 'code' parameter from the URL (e.g., from /code/abc1234)
     const { code } = useParams();
     const [linkStats, setLinkStats] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -48,7 +42,7 @@ function StatsPage() {
         loadStats();
     }, [code]);
 
-    // --- Render Logic ---
+   
 
     if (loading) {
         return (
@@ -85,7 +79,7 @@ function StatsPage() {
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginTop: '20px' }}>
                     
-                    {/* Column 1: Core Details */}
+                
                     <div>
                         <p style={{ fontWeight: 'bold', color: '#4a5568' }}>Original URL:</p>
                         <p style={{ wordWrap: 'break-word' }}>
@@ -100,7 +94,7 @@ function StatsPage() {
                         </p>
                     </div>
 
-                    {/* Column 2: Stats */}
+                  
                     <div>
                         <div style={{ border: '1px solid #ff502f', padding: '15px', borderRadius: '8px', marginBottom: '15px', textAlign: 'center', backgroundColor: '#fff7f7' }}>
                             <p style={{ margin: 0, fontSize: '2.5rem', fontWeight: 'bold', color: '#ff502f' }}>

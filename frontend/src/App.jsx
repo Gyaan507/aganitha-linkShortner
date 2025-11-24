@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link as RouterLink } from 'reac
 import { fetchLinks, createLink, deleteLink } from './apiService';
 import StatsPage from './StatsPage'; 
 
-// --- Component: Link Creation Form ---
+// Link Creation Form ---
 function LinkCreationForm({ onLinkCreated }) {
     const [targetUrl, setTargetUrl] = useState('');
     const [customCode, setCustomCode] = useState('');
@@ -91,7 +91,7 @@ function LinkCreationForm({ onLinkCreated }) {
     );
 }
 
-// --- Component: QR Code Generator ---
+// QR Code Generator ---
 function QRCodeGenerator() {
     const [qrUrl, setQrUrl] = useState('');
     const [imageUrl, setImageUrl] = useState(null);
@@ -173,7 +173,7 @@ function QRCodeGenerator() {
     );
 }
 
-// --- Component: Dashboard (Main Page) ---
+// Dashboard
 function Dashboard() {
     const [links, setLinks] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -328,7 +328,7 @@ function Dashboard() {
     );
 }
 
-// --- Main App Component (Routing) ---
+// --- Main App ---
 function App() {
     return (
         <Router>
